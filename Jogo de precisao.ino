@@ -21,12 +21,15 @@
 int sensorValue = 0; //Valor lido diretamente do potenciometro
 int outputValue = 0; //Valor após o mapeamento para enquadrar 0~1023 para 0~255  
 
-const int analogInPin = A0;//Define uma variável inalterável com valor A0(Pino analógico A0) - Padrão do código base
-const int LEDvermelho = 9; //Define uma variável inalterável com valor 9(Pino digital 9)
-const int LEDverde = 2; //Define uma variável inalterável com valor 2(Pino digital 2)
+#define analogInPin A0   //Define analogInPin como sendo o pino analógico A0
+#define LEDvermelho 9   //Define LEDvermelho como sendo o pino 9
+#define LEDverde 2     //Define LEDverde como sendo o pino 2
+#define Buzzer 7  //Define Buzzer como sendo o pino 7
 
 void setup() {
   pinMode(LEDverde,OUTPUT); // Define o pino 2 como OUTPUT
+  pinMode(LEDvermelho,OUTPUT); // Define o pino 2 como OUTPUT
+  pinMode(Buzzer, OUTPUT);
   Serial.begin(9600);       // Inicia o monitor serial - Padrão do código base
 }
 
@@ -40,13 +43,13 @@ void loop() {
   analogWrite(LEDvermelho,0); //Seta o sinal PWM do pino 9 como 0
   }else{
     if(sensorValue < MinFaixa){
-      outputValue = map(sensorValue, MinFaixa, 1023, 255, 0);//Mapeia o valor do potenciometro para 255~0
-      tone(7,outputValue);//Toca a frequência baseada no valor da resistencia do potenciômetro
-      digitalWrite(LEDverde, LOW);//Seta o pino digital 2 como LOW
+        outputValue = map(sensorValue, MinFaixa, 1023, 255, 0);//Mapeia o valor do potenciometro para 255~0
+        tone(7,outputValue);//Toca a frequência baseada no valor da resistencia do potenciômetro
+        digitalWrite(LEDverde, LOW);//Seta o pino digital 2 como LOW
       if(outputValue > 255){
          analogWrite(LEDvermelho,255);//Seta o sinal PWM do pino 9 baseado no valor da resistencia do potenciômetro
       }else{
-      analogWrite(LEDvermelho,outputValue);//Seta o sinal PWM do pino 9 baseado no valor da resistencia do potenciômetro
+        analogWrite(LEDvermelho,outputValue);//Seta o sinal PWM do pino 9 baseado no valor da resistencia do potenciômetro
       }
     }
     if(sensorValue > MaxFaixa ){
