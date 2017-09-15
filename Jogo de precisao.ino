@@ -62,8 +62,8 @@ void loop() {
   }
 
   Serial.print("sensor = "); //Printa o texto no monitor serial
-  Serial.print(sensorValue);//Printa o texto no monitor serial
-  Serial.print("\t output = ");//Printa o texto no monitor serial
+  Serial.printl(sensorValue);//Printa o texto no monitor serial
+  Serial.print("output = ");//Printa o texto no monitor serial
   Serial.println(outputValue);//Printa o texto no monitor serial
 
   delay(50); // Da uma pausa de 50ms no código a cada loop
