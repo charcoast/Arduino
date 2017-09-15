@@ -38,7 +38,7 @@ void loop() {
   sensorValue = analogRead(analogInPin); // Lê o pino digital A0 e grava em "sensorValue"
 
   if (MinFaixa < sensorValue && MaxFaixa > sensorValue) {
-    noTone(7); //Desliga o buzzer
+    noTone(Buzzer); //Desliga o buzzer
     digitalWrite(LEDverde, HIGH); //Seta o pino digital 2 como HIGH
     analogWrite(LEDvermelho, 0); //Seta o sinal PWM do pino 9 como 0
   } else {
