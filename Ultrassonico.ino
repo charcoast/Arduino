@@ -39,7 +39,8 @@ void loop() {
     tone(buzzer, 850);
     delay(200);
     noTone(buzzer); //Para de tocar no buzzer
-  } else if(distancia > 2.0) {
+  }
+    if(distancia > 2.0) {
     digitalWrite(LEDVerde, LOW);  //Definindo nível lógico baixo ao LEDVerde
     digitalWrite(LEDVermelho, HIGH);  //Definindo nível lógico alto ao LEDVermelho
     Serial.print("Distancia: ");  //Escreve no monitor serial
