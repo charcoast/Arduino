@@ -2,6 +2,7 @@
  * 
  * Este código tem como objetivo indicar se a porta está aberta ou fechada,
  * emitindo um som e ligando um LED vermelho ou verde dependendo da situação.
+ *
  */
 
 #include <Ultrasonic.h> //Inclusão da biblioteca
