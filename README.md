@@ -1,5 +1,4 @@
-> - 
-Equipe
+> - Equipe
 Coordenador: Diego da Silva de Medeiros <diegomedeiros@ifsc.edu.br>
 Membro: Deise Monquelate Arndt <deise.arndt@ifsc.edu.br>
 Membro: Mathias Silva da Rosa <mathiassilva4@gmail.com>
