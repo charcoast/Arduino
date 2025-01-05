@@ -5,54 +5,55 @@
  *
  */
 
-#include <Ultrasonic.h> //Inclusão da biblioteca
+#include <Ultrasonic.h>
 
-#define LEDVerde 5    //Define o pino LEDVerde
-#define LEDVermelho 6 //Define o pino LEDVermelho
-#define buzzer 7      //Define o pino buzzer
+#define LEDVerde 5
+#define LEDVermelho 6
+#define buzzer 7
 
-#define Echo 10       //Define o pino Echo
-#define Trigger 11    //Define o pino Trigger
-Ultrasonic ultrasonic(Trigger, Echo); //Inicia o sensor ultrassonico usando os valores de Trigger(11) e Echo (10)
+#define Echo 10
+#define Trigger 11
+Ultrasonic ultrasonic(Trigger, Echo);
+
 void setup() {
-  pinMode(buzzer, OUTPUT);  //Define buzzer como sendo um pino OUTPUT
-  pinMode(LEDVerde, OUTPUT);  //Define LEDVerde como sendo um pino OUTPUT
-  pinMode(LEDVermelho, OUTPUT); //Define LEDVermelho como sendo um pino OUTPUT
+  pinMode(buzzer, OUTPUT);
+  pinMode(LEDVerde, OUTPUT);
+  pinMode(LEDVermelho, OUTPUT);
 
   Serial.begin(9600);
 
 }
 
 void loop() {
-  float distancia = ultrasonic.distanceRead();  //Armazena a leitura da distância na variável flutuante distancia
+  float distancia = ultrasonic.distanceRead();
 
-  if (distancia == 2.0) { //Condicional com distancia
-    digitalWrite(LEDVerde, HIGH); //Definindo nível lógico alto ao LEDVerde
-    digitalWrite(LEDVermelho, LOW); //Definindo nível lógico baixo ao LERVermelho
-    Serial.print("Distancia: ");  //Escreve no monitor serial
-    Serial.println(distancia);    //Escreve no monitor serial
-    Serial.println("Porta fechada");  //Escreve no monitor serial
-    tone(buzzer, 850);  //Toca no buzzer com frequência 850
-    delay(200); //Delay de 200ms
+  if (distancia == 2.0) {
+    digitalWrite(LEDVerde, HIGH);
+    digitalWrite(LEDVermelho, LOW);
+    Serial.print("Distancia: ");
+    Serial.println(distancia);
+    Serial.println("Porta fechada");
+    tone(buzzer, 850);
+    delay(200);
     noTone(buzzer);
     delay(100);
     tone(buzzer, 850);
     delay(200);
-    noTone(buzzer); //Para de tocar no buzzer
+    noTone(buzzer);
   }
     if(distancia > 2.0) {
-    digitalWrite(LEDVerde, LOW);  //Definindo nível lógico baixo ao LEDVerde
-    digitalWrite(LEDVermelho, HIGH);  //Definindo nível lógico alto ao LEDVermelho
-    Serial.print("Distancia: ");  //Escreve no monitor serial
-    Serial.println(distancia);    //Escreve no monitor serial
-    Serial.println("Porta aberta"); //Escreve no monitor serial
-    tone(buzzer, 300);  //Toca no buzzer com frequência 300
-    delay(200); //Delay de 200ms
+    digitalWrite(LEDVerde, LOW);
+    digitalWrite(LEDVermelho, HIGH);
+    Serial.print("Distancia: ");
+    Serial.println(distancia);
+    Serial.println("Porta aberta");
+    tone(buzzer, 300);
+    delay(200);
     noTone(buzzer);
     delay(100);
     tone(buzzer, 300);
     delay(200);
-    noTone(buzzer); //Para de tocar no buzzer
+    noTone(buzzer);
   }
 
 }
