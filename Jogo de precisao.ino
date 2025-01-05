@@ -8,63 +8,58 @@
   tocada no buzzer. Porém, dentro de uma determinada faixa de valores na leitura do potenciômetro(MinFaixa~MaxFaixa),
   o LED vermelho é desligado, o LED verde é ligado, e o buzzer desligado, indicando que a resistência do
   potenciômetro se enquadra na faixa configurada.
-
-  Neste código, há uma faixa de valores para a leitura do potenciometro definida por MinFaixa e MaxFaixa.
-  Quando o usuário deixa o potenciometro na posição que corresponde à faixa de valores definida, um LED
-  verde é ligado. Em contrapartida, se o potenciometro não estiver nesta faixa, um buzzer começará a
-  tocar e um LED vermelho acenderá, tendo a frequência tocada no buzzer e a luminosidade do LED vermelho
-  variando conforme for ficando mais próximo ou distante da faia de valores definida.
 */
-#define MinFaixa  501 //Define o valor mínimo da faixa de valores
-#define MaxFaixa  521 //Define o valor máximo da faixa de valores
 
-int sensorValue = 0; //Valor lido diretamente do potenciometro
-int outputValue = 0; //Valor após o mapeamento para enquadrar 0~1023 para 0~255
+#define MinFaixa  501
+#define MaxFaixa  521
 
-#define analogInPin A0   //Define analogInPin como sendo o pino analógico A0
-#define LEDvermelho 9   //Define LEDvermelho como sendo o pino 9
-#define LEDverde 2     //Define LEDverde como sendo o pino 2
-#define Buzzer 7  //Define Buzzer como sendo o pino 7
+int sensorValue = 0;
+int outputValue = 0;
+
+#define analogInPin A0
+#define LEDvermelho 9
+#define LEDverde 2
+#define Buzzer 7
 
 void setup() {
-  pinMode(LEDverde, OUTPUT); // Define o pino 2 como OUTPUT
-  pinMode(LEDvermelho, OUTPUT); // Define o pino 2 como OUTPUT
+  pinMode(LEDverde, OUTPUT);
+  pinMode(LEDvermelho, OUTPUT);
   pinMode(Buzzer, OUTPUT);
-  Serial.begin(9600);       // Inicia o monitor serial - Padrão do código base
+  Serial.begin(9600);
 }
 
 void loop() {
 
-  sensorValue = analogRead(analogInPin); // Lê o pino digital A0 e grava em "sensorValue"
+  sensorValue = analogRead(analogInPin);
 
   if (MinFaixa < sensorValue && MaxFaixa > sensorValue) {
-    noTone(Buzzer); //Desliga o buzzer
-    digitalWrite(LEDverde, HIGH); //Seta o pino digital 2 como HIGH
-    analogWrite(LEDvermelho, 0); //Seta o sinal PWM do pino 9 como 0
+    noTone(Buzzer);
+    digitalWrite(LEDverde, HIGH);
+    analogWrite(LEDvermelho, 0);
   } else {
     if (sensorValue < MinFaixa) {
-      outputValue = map(sensorValue, MinFaixa, 1023, 255, 0);//Mapeia o valor do potenciometro para 255~0
-      tone(Buzzer, outputValue); //Toca a frequência baseada no valor da resistencia do potenciômetro
-      digitalWrite(LEDverde, LOW);//Seta o pino digital 2 como LOW
+      outputValue = map(sensorValue, MinFaixa, 1023, 255, 0);
+      tone(Buzzer, outputValue);
+      digitalWrite(LEDverde, LOW);
       if (outputValue > 255) {
-        analogWrite(LEDvermelho, 255); //Seta o sinal PWM do pino 9 baseado no valor da resistencia do potenciômetro
+        analogWrite(LEDvermelho, 255);
       } else {
-        analogWrite(LEDvermelho, outputValue); //Seta o sinal PWM do pino 9 baseado no valor da resistencia do potenciômetro
+        analogWrite(LEDvermelho, outputValue);
       }
     }
     if (sensorValue > MaxFaixa ) {
       outputValue = 0;
-      outputValue = map(sensorValue, MaxFaixa, 1023, 0, 255);//Mapeia o valor do potenciometro para 0~255
-      tone(Buzzer, outputValue); //Toca a frequência baseada no valor da resistencia do potenciômetro
-      digitalWrite(LEDverde, LOW);//Seta o pino digital 2 como LOW
-      analogWrite(LEDvermelho, outputValue); //Seta o sinal PWM do pino 9 baseado no valor da resistencia do potenciômetro
+      outputValue = map(sensorValue, MaxFaixa, 1023, 0, 255);
+      tone(Buzzer, outputValue);
+      digitalWrite(LEDverde, LOW);
+      analogWrite(LEDvermelho, outputValue);
     }
   }
 
-  Serial.print("sensor = "); //Printa o texto no monitor serial
-  Serial.printl(sensorValue);//Printa o texto no monitor serial
-  Serial.print("output = ");//Printa o texto no monitor serial
-  Serial.println(outputValue);//Printa o texto no monitor serial
+  Serial.print("sensor = ");
+  Serial.printl(sensorValue);
+  Serial.print("output = ");
+  Serial.println(outputValue);
 
-  delay(50); // Da uma pausa de 50ms no código a cada loop
+  delay(50);
 }
